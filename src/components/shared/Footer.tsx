@@ -25,15 +25,20 @@ export const Footer = () => {
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span className="text-sm">123 Education Street, Learning City</span>
+                <span className="text-sm">1234 Education Boulevard, Knowledge City, KC 12345</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
-                <span className="text-sm">+1 (555) 123-4567</span>
+                <span className="text-sm">Main: (555) 123-4567 | Admissions: (555) 123-4568</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
                 <span className="text-sm">info@excellenceacademy.edu</span>
+              </div>
+              <div className="mt-3 text-sm">
+                <p className="font-medium">Office Hours:</p>
+                <p className="text-primary-foreground/80">Monday - Friday: 7:30 AM - 4:30 PM</p>
+                <p className="text-primary-foreground/80">Saturday: 9:00 AM - 1:00 PM</p>
               </div>
             </div>
           </div>
@@ -49,10 +54,22 @@ export const Footer = () => {
                 Admissions
               </Button>
               <Button variant="ghost" size="sm" className="justify-start text-white hover:bg-white/10">
-                Faculty
+                Academic Programs
               </Button>
               <Button variant="ghost" size="sm" className="justify-start text-white hover:bg-white/10">
-                Events
+                Faculty & Staff
+              </Button>
+              <Button variant="ghost" size="sm" className="justify-start text-white hover:bg-white/10">
+                Student Life
+              </Button>
+              <Button variant="ghost" size="sm" className="justify-start text-white hover:bg-white/10">
+                Parent Resources
+              </Button>
+              <Button variant="ghost" size="sm" className="justify-start text-white hover:bg-white/10">
+                Alumni
+              </Button>
+              <Button variant="ghost" size="sm" className="justify-start text-white hover:bg-white/10">
+                News & Events
               </Button>
             </div>
           </div>

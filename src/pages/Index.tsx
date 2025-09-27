@@ -3,6 +3,8 @@ import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
 import { HeroSection } from "@/components/home/HeroSection";
 import { FeatureGrid } from "@/components/home/FeatureGrid";
+import { SchoolInfoSection } from "@/components/home/SchoolInfoSection";
+import { AnnouncementsSection } from "@/components/home/AnnouncementsSection";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { Dashboard } from "@/pages/Dashboard";
 
@@ -42,6 +44,8 @@ const Index = () => {
       <main>
         <HeroSection onLoginClick={() => setShowLogin(true)} />
         <FeatureGrid />
+        <SchoolInfoSection />
+        <AnnouncementsSection />
       </main>
 
       <Footer />
