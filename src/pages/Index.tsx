@@ -1,37 +1,46 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
 import { HeroSection } from "@/components/home/HeroSection";
 import { FeatureGrid } from "@/components/home/FeatureGrid";
 import { SchoolInfoSection } from "@/components/home/SchoolInfoSection";
 import { AnnouncementsSection } from "@/components/home/AnnouncementsSection";
-import { LoginForm } from "@/components/auth/LoginForm";
 import { Dashboard } from "@/pages/Dashboard";
+import { useAuth } from "@/hooks/useAuth";
 
 const Index = () => {
-  const [showLogin, setShowLogin] = useState(false);
-  const [user, setUser] = useState<{ name: string; role: string; avatar?: string } | null>(null);
+  const { user, profile, loading, signOut } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogin = (credentials: { email: string; password: string; role: string }) => {
-    // For demo purposes, simulate successful login
-    setUser({
-      name: credentials.role === 'admin' ? 'John Administrator' : 
-            credentials.role === 'teacher' ? 'Sarah Johnson' : 'Mike Display',
-      role: credentials.role,
+  useEffect(() => {
+    if (!loading && !user) {
+      // User is not authenticated, show landing page
+    }
+  }, [loading, user]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (user && profile) {
+    const userData = {
+      name: profile.full_name,
+      role: profile.role,
       avatar: undefined
-    });
-    setShowLogin(false);
-  };
+    };
 
-  const handleLogout = () => {
-    setUser(null);
-  };
-
-  if (user) {
     return (
       <div className="min-h-screen bg-background">
-        <Header user={user} onLogout={handleLogout} />
-        <Dashboard userRole={user.role} />
+        <Header user={userData} onLogout={signOut} />
+        <Dashboard userRole={profile.role} />
         <Footer />
       </div>
     );
@@ -39,23 +48,16 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onLogin={() => setShowLogin(true)} />
+      <Header onLogin={() => navigate('/auth')} />
       
       <main>
-        <HeroSection onLoginClick={() => setShowLogin(true)} />
+        <HeroSection onLoginClick={() => navigate('/auth')} />
         <FeatureGrid />
         <SchoolInfoSection />
         <AnnouncementsSection />
       </main>
 
       <Footer />
-
-      {showLogin && (
-        <LoginForm 
-          onLogin={handleLogin} 
-          onClose={() => setShowLogin(false)} 
-        />
-      )}
     </div>
   );
 };
